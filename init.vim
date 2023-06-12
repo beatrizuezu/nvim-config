@@ -20,6 +20,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
  Plug 'rmagatti/auto-session'
  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+ Plug 'mechatroner/rainbow_csv'
 call plug#end()
 
 let mapleader=" "
