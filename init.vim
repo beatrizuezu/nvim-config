@@ -35,7 +35,8 @@ set softtabstop=4           " see multiple spaces as tabstops so <BS> does the r
 set expandtab               " converts tabs to white space
 set shiftwidth=4            " width for autoindents
 set autoindent              " indent a new line the same amount as the line just typed
-set number                  " add line numbers
+set number relativenumber   " add line numbers
+set nu rnu
 set wildmode=longest,list   " get bash-like tab completions
 filetype plugin indent on   " allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
@@ -88,9 +89,20 @@ let g:lightline = {
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
+      \   'gitbranch': 'gitbranch#name',
+      \   'filename': 'LightlineFilename',
       \ },
       \ }
+function! LightlineFilename()
+  return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+        \ &filetype ==# 'unite' ? unite#get_status_string() :
+        \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+        \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+endfunction
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
+
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 command! -nargs=0 MdFmt :CocCommand markdownlint.fixAll
@@ -117,12 +129,14 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 nnoremap <silent> <leader>gg :LazyGit<CR>
 
-let NERDTreeIgnore = ['\.circleci', '\.github', '\.dockerignore$','\.gitignore$','\.pre-commit-config$',]
+nnoremap <leader>nt <cmd>NERDTreeToggle<CR>
+
+let NERDTreeIgnore = ['\.mypy_cache', '\.pytest_cache', '\.vscode', '__pycache__']
 
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "lua", "python" },
+  ensure_installed = { "lua", "python", "json" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
