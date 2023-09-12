@@ -98,7 +98,7 @@ function! LightlineFilename()
   return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
         \ &filetype ==# 'unite' ? unite#get_status_string() :
         \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
-        \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+        \ expand('%:F') !=# '' ? expand('%:F') : '[No Name]'
 endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
@@ -125,6 +125,7 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fr <cmd>Telescope resume<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
@@ -216,4 +217,3 @@ require("auto-session").setup {
   },
 }
 EOF
-
