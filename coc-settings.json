@@ -1,0 +1,54 @@
+{
+  "python.pythonPath": "${workspaceFolder}/.venv/bin/python",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "${workspaceFolder}/.venv/bin/black",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "pyright.organizeimports.provider": "isort",
+  "pyright.organizeimports.path": "${workspaceFolder}/.venv/bin/isort",
+  "pyright.organizeImport.args": ["--profile", "black"], 
+  "yaml.format.enable": true,
+
+  "workspace.rootPatterns": [
+    ".git",
+    "pyproject.toml",
+    "setup.py",
+    ".env"
+  ],
+  "coc.preferences.formatOnSaveFiletypes": ["python", "yaml", "tf"],
+  "coc.preferences.willSaveHandlerTimeout": 3000,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.errorSign": "✖",
+  "diagnostic.warningSign": "⚠",
+  "diagnostic.infoSign": "●",
+  "diagnostic.hintSign": "○",
+  "suggest.floatConfig": {
+    "border": true,
+    "rounded": true
+  },
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded": true,
+    "borderhighlight": "WarningMsg"
+  },
+  "languageserver": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "tf"],
+      "initializationOptions": {},
+      "settings": {}
+    },
+    "python": {"formatting": {"provider": "black"}},
+    "black": {"enabled":true}
+  },
+  "cSpell.userWords": [
+    "consts",
+    "pydantic",
+    "qlty",
+    "structlog",
+    "venv"
+  ],
+  "snippets.ultisnips.pythonPrompt": false
+}
