@@ -22,6 +22,7 @@ call plug#begin($HOME.'/.local/share/nvim/plugged')
  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
  Plug 'mechatroner/rainbow_csv'
  Plug 'RRethy/vim-illuminate'
+ Plug 'levouh/tint.nvim'
 call plug#end()
 
 let mapleader=" "
