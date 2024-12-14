@@ -12,9 +12,11 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import any extras modules here
+    { import = "lazyvim.plugins.extras.lang.markdown" },
+    { import = "lazyvim.plugins.extras.lang.python" },
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    --{ import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -45,3 +47,54 @@ require("lazy").setup({
     },
   },
 })
+
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        pylsp = {
+          enabled = false,
+          settings = {
+            pylsp = {
+              plugins = {
+                autopep8 = { enabled = false },
+                black = { enabled = false },
+                pycodestyle = { enabled = false },
+                pyflakes = { enabled = false },
+                rope_autoimport = { enabled = true },
+                ruff = {
+                  enabled = true,
+                  formatEnabled = true,
+                },
+                yapf = { enabled = false },
+              },
+            },
+          },
+        },
+        basedpyright = {
+          enabled = true,
+          python = {
+            analysis = {
+              diagnosticMode = "workspace",
+            },
+          },
+        },
+        pyright = {
+          enabled = false,
+          python = {
+            analysis = {
+              diagnosticMode = "workspace",
+            },
+          },
+        },
+        ruff = {
+          enabled = true,
+        },
+        ruff_lsp = {
+          enabled = false,
+        },
+      },
+    },
+  },
+}
